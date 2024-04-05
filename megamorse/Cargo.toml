@@ -1,0 +1,13 @@
+[package]
+name = "megamorse"
+description = "A simple morse code translator"
+license.workspace = true
+version.workspace = true
+authors.workspace = true
+homepage.workspace = true
+repository.workspace = true
+edition.workspace = true
+
+[dependencies]
+megamorse_core.workspace = true
+megamorse_proc_macro.workspace = true

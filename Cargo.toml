@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "megamorse",
+    "megamorse_proc_macro",
+    "megamorse_core"
+]
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Wouter de Bruijn <wouter@wutru.io>"]
+homepage = "https://github.com/cloone8/megamorse"
+repository = "https://github.com/cloone8/megamorse"
+edition = "2021"
+license = "MPL-2.0"
+
+[workspace.dependencies]
+megamorse_core = { path = "megamorse_core", version = "0.1.0" }
+megamorse_proc_macro = { path = "megamorse_proc_macro", version = "0.1.0" }

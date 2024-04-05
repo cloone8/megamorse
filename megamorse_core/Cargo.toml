@@ -1,0 +1,9 @@
+[package]
+name = "megamorse_core"
+description = "The core types for the megamorse library"
+license.workspace = true
+version.workspace = true
+authors.workspace = true
+homepage.workspace = true
+repository.workspace = true
+edition.workspace = true
