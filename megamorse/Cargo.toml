@@ -1,6 +1,7 @@
 [package]
 name = "megamorse"
 description = "A simple morse code translator"
+readme = "../README.md"
 license.workspace = true
 version.workspace = true
 authors.workspace = true

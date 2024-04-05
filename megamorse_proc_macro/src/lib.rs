@@ -1,14 +1,7 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+extern crate proc_macro;
+use proc_macro::TokenStream;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[proc_macro]
+pub fn make_answer(_item: TokenStream) -> TokenStream {
+    "fn answer() -> u32 { 42 }".parse().unwrap()
 }

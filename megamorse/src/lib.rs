@@ -1,3 +1,9 @@
+#[doc(inline)]
+pub use megamorse_core::*;
+
+#[doc(inline)]
+pub use megamorse_proc_macro::*;
+
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
