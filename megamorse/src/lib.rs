@@ -103,3 +103,96 @@ impl TryFrom<char> for MorseChar {
         Ok(as_unsized.into())
     }
 }
+
+pub struct MorsePlayer<Play, Pause>
+where
+    Play: Fn(usize),
+    Pause: Fn(usize),
+{
+    time_unit: usize,
+    play: Play,
+    pause: Pause,
+}
+
+pub enum MorsePlayerError {
+    InvalidCharacter,
+}
+
+impl<Play, Pause> MorsePlayer<Play, Pause>
+where
+    Play: Fn(usize),
+    Pause: Fn(usize),
+{
+    pub fn new(time_unit: usize, play: Play, pause: Pause) -> Self {
+        MorsePlayer {
+            time_unit,
+            play,
+            pause,
+        }
+    }
+
+    fn play_word(&self, word: &str) -> Result<(), MorsePlayerError> {
+        for (index, c) in word.chars().enumerate() {
+            let morse_char = match MorseChar::try_from(c) {
+                Ok(morse_char) => morse_char,
+                Err(_) => return Err(MorsePlayerError::InvalidCharacter),
+            };
+
+            if index != 0 {
+                (self.pause)(self.time_unit * 3);
+            }
+
+            let seq_len: usize;
+            let mut seq_padded = [MorseSequence::Pause; 9];
+
+            match morse_char.morse {
+                MorseUnsized::One(morse) => {
+                    seq_len = 1;
+                    seq_padded[..seq_len].copy_from_slice(&morse.to_sequence());
+                }
+                MorseUnsized::Two(morse) => {
+                    seq_len = 3;
+                    seq_padded[..seq_len].copy_from_slice(&morse.to_sequence());
+                }
+                MorseUnsized::Three(morse) => {
+                    seq_len = 5;
+                    seq_padded[..seq_len].copy_from_slice(&morse.to_sequence());
+                }
+                MorseUnsized::Four(morse) => {
+                    seq_len = 7;
+                    seq_padded[..seq_len].copy_from_slice(&morse.to_sequence());
+                }
+                MorseUnsized::Five(morse) => {
+                    seq_len = 9;
+                    seq_padded[..seq_len].copy_from_slice(&morse.to_sequence());
+                }
+            };
+
+            (0..seq_len).for_each(|i| match seq_padded[i] {
+                MorseSequence::Code(code) => match code {
+                    MorseCode::Dot => (self.play)(self.time_unit),
+                    MorseCode::Dash => (self.play)(self.time_unit * 3),
+                },
+                MorseSequence::Pause => {
+                    (self.pause)(self.time_unit);
+                }
+            });
+        }
+
+        Ok(())
+    }
+
+    pub fn play(&self, source: &str) -> Result<(), MorsePlayerError> {
+        let words = source.split_whitespace();
+
+        for (index, word) in words.enumerate() {
+            if index != 0 {
+                (self.pause)(self.time_unit * 7);
+            }
+
+            self.play_word(word)?;
+        }
+
+        Ok(())
+    }
+}

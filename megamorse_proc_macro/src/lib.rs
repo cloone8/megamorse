@@ -9,11 +9,11 @@ pub fn morse(item: TokenStream) -> TokenStream {
 
     for c in as_string.chars() {
         match c {
-            ' ' => {},
+            ' ' => {}
             '.' => codes.push("megamorse_core::MorseCode::Dot"),
             '-' => codes.push("megamorse_core::MorseCode::Dash"),
             '_' => codes.push("megamorse_core::MorseCode::Dash"),
-            _ => panic!("Invalid character in morse code: {}", c)
+            _ => panic!("Invalid character in morse code: {}", c),
         }
     }
     let joined = codes.join(", ");
