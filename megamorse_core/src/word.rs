@@ -1,5 +1,11 @@
 use crate::{MorseCode, MorseSequence};
 
+/// A struct representing a single morse code sequence that maps
+/// to a single character. For example, 'a', '0' or 'G' all map
+/// to a single [MorseWord].
+/// 
+/// The [MorseWord] can contain up to 5 [MorseCode] values, and can
+/// thus represent any character in the Morse code alphabet (and no more)
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct MorseWord {
     code: u8,
@@ -8,7 +14,7 @@ pub struct MorseWord {
 macro_rules! from_word {
     ($num:literal) => {
         impl From<[MorseCode; $num]> for MorseWord {
-            /// Create a MorseWord from an array of MorseCode values.
+            /// Creates a [MorseWord] from an array of [MorseCode] values.
             fn from(codes: [MorseCode; $num]) -> Self {
                 MorseWord::new(codes)
             }
@@ -52,6 +58,32 @@ impl MorseWord {
         MorseWord { code }
     }
 
+    /// Returns the [MorseWord] as an array of [MorseCode] values.
+    /// 
+    /// The array will contain up to 5 [MorseCode] values, depending
+    /// on the length of the [MorseWord].
+    /// 
+    /// # Returns
+    /// 
+    /// A tuple containing the length of the MorseWord and an array
+    /// of [MorseCode] values.
+    /// 
+    /// The returned array will be padded with [MorseCode::Dot] values if the
+    /// [MorseWord] is shorter than 5 characters.
+    /// 
+    /// # Examples
+    /// 
+    /// ```
+    /// let word = morse!(..-);
+    /// 
+    /// let (len, codes) = word.to_array();
+    /// 
+    /// assert_eq!(len, 3);
+    /// 
+    /// assert_eq!(codes[0], MorseCode::Dot);
+    /// assert_eq!(codes[1], MorseCode::Dot);
+    /// assert_eq!(codes[2], MorseCode::Dash);
+    /// ````
     pub const fn to_array(self) -> (usize, [MorseCode; 5]) {
         let mut codes = [MorseCode::Dot; 5];
         let n = self.len();
@@ -99,15 +131,32 @@ impl MorseWord {
         (n, codes)
     }
 
+    /// Returns the amount of [MorseCode] values in the [MorseWord].
     pub const fn len(&self) -> usize {
         debug_assert!(self.code & 0b0000_0111 <= 5);
         (self.code & 0b0000_0111) as usize
     }
 
+    /// Returns true if the [MorseWord] is empty, i.e. contains no [MorseCode] values.
+    /// Should basically always return false, as a [MorseWord] with no [MorseCode] values
+    /// cannot be constructed without shenanigans.
     pub const fn is_empty(&self) -> bool {
         self.len() == 0
     }
 
+    /// Returns the [MorseWord] as a [MorseSequence] array.
+    /// Used internally by the megamorse library to convert a [MorseWord] to a
+    /// sequence of playable [MorseSequence] values, with each
+    /// [MorseSequence] representing a single Morse code time unit.
+    /// 
+    /// # Returns
+    /// 
+    /// A tuple containing the length of the [MorseSequence] array and the
+    /// array itself, padded with [MorseSequence::Pause] values if the
+    /// [MorseWord] is shorter than 5 characters.
+    /// 
+    /// Reading beyond the length given by the first element of the tuple is
+    /// not useful, as the array will be padded with [MorseSequence::Pause] values.
     pub const fn to_sequence(self) -> (usize, [MorseSequence; 9]) {
         let mut sequence = [MorseSequence::Pause; 9];
 
@@ -143,6 +192,12 @@ impl MorseWord {
     }
 }
 
+/// Converts a single [char] to a [MorseWord].
+/// Is used both internally by the megamorse library and can be used
+/// by the user to convert a single character to a [MorseWord], which
+/// can then be played by a player.
+/// 
+/// Will return an error if the character has no Morse code representation.
 impl TryFrom<char> for MorseWord {
     type Error = ();
 

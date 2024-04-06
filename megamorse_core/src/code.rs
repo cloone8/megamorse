@@ -1,3 +1,4 @@
+/// Enum representing a single Morse code symbol, either a dot or a dash.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum MorseCode {
     Dot,
