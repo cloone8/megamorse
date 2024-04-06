@@ -28,12 +28,9 @@ impl<DecoderError> From<DecoderError> for MorsePlayerError<DecoderError> {
     }
 }
 
-impl<T: MorseDecoder> MorsePlayer<T>
-{
+impl<T: MorseDecoder> MorsePlayer<T> {
     pub fn new(decoder: T) -> Self {
-        MorsePlayer {
-            decoder
-        }
+        MorsePlayer { decoder }
     }
 
     fn play_str_word(&mut self, word: &str) -> Result<(), MorsePlayerError<T::Error>> {
@@ -43,7 +40,7 @@ impl<T: MorseDecoder> MorsePlayer<T>
             }
 
             let mword = MorseWord::try_from(c).map_err(|_| MorsePlayerError::InvalidCharacter)?;
-            
+
             self.play_word(mword)?;
         }
 
@@ -66,18 +63,16 @@ impl<T: MorseDecoder> MorsePlayer<T>
 
     pub fn play_word(&mut self, word: MorseWord) -> Result<(), MorsePlayerError<T::Error>> {
         let (seq_len, seq_padded) = word.to_sequence();
-        
+
         seq_padded
             .into_iter()
             .take(seq_len)
-            .try_for_each(|seq| {
-                match seq {
-                    MorseSequence::Code(code) => match code {
-                        MorseCode::Dot => self.decoder.on(1),
-                        MorseCode::Dash => self.decoder.on(3),
-                    },
-                    MorseSequence::Pause => self.decoder.off(1)
-                }
+            .try_for_each(|seq| match seq {
+                MorseSequence::Code(code) => match code {
+                    MorseCode::Dot => self.decoder.on(1),
+                    MorseCode::Dash => self.decoder.on(3),
+                },
+                MorseSequence::Pause => self.decoder.off(1),
             })?;
 
         Ok(())
