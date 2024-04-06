@@ -110,7 +110,7 @@ impl MorseWord {
 
     pub const fn to_sequence(self) -> (usize, [MorseSequence; 9]) {
         let mut sequence = [MorseSequence::Pause; 9];
-        
+
         let (n, codes) = self.to_array();
 
         debug_assert!(n <= 5);
