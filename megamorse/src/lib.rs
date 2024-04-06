@@ -106,8 +106,8 @@ impl TryFrom<char> for MorseChar {
 
 pub struct MorsePlayer<Play, Pause>
 where
-    Play: Fn(usize),
-    Pause: Fn(usize),
+    Play: FnMut(usize),
+    Pause: FnMut(usize),
 {
     time_unit: usize,
     play: Play,
@@ -120,8 +120,8 @@ pub enum MorsePlayerError {
 
 impl<Play, Pause> MorsePlayer<Play, Pause>
 where
-    Play: Fn(usize),
-    Pause: Fn(usize),
+    Play: FnMut(usize),
+    Pause: FnMut(usize),
 {
     pub fn new(time_unit: usize, play: Play, pause: Pause) -> Self {
         MorsePlayer {
@@ -131,7 +131,7 @@ where
         }
     }
 
-    fn play_word(&self, word: &str) -> Result<(), MorsePlayerError> {
+    fn play_word(&mut self, word: &str) -> Result<(), MorsePlayerError> {
         for (index, c) in word.chars().enumerate() {
             let morse_char = match MorseChar::try_from(c) {
                 Ok(morse_char) => morse_char,
@@ -182,7 +182,7 @@ where
         Ok(())
     }
 
-    pub fn play(&self, source: &str) -> Result<(), MorsePlayerError> {
+    pub fn play(&mut self, source: &str) -> Result<(), MorsePlayerError> {
         let words = source.split_whitespace();
 
         for (index, word) in words.enumerate() {
