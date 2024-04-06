@@ -6,3 +6,4 @@ imports_granularity = "Item"
 group_imports = "StdExternalCrate"
 reorder_imports = true
 reorder_modules = true
+wrap_comments = true

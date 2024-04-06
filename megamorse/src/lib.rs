@@ -3,18 +3,20 @@
 #[doc(inline)]
 pub use megamorse_core::*;
 
-/// This macro is used to generate a static array of [MorseWord] structs from a literal whitespace-delimited sequence of dots and dashes.
+/// This macro is used to generate a static array of [MorseWord] structs from a
+/// literal whitespace-delimited sequence of dots and dashes.
 /// It's main use should be generating compile-time Morse code sequences.
 /// It accepts the characters `.` for a dot, and `-` or `_` for a dash.
-/// 
-/// Every sequence of up to five characters will be converted to a [MorseWord] struct, as each alphanumeric character is
-/// mapped to a sequence of up to five Morse code characters.
-/// 
+///
+/// Every sequence of up to five characters will be converted to a [MorseWord] struct,
+/// as each alphanumeric character is mapped to a sequence of up to five Morse
+/// code characters.
+///
 /// # Examples
-/// 
+///
 /// ```
 /// use megamorse::morse;
-/// 
+///
 /// // Maps to the Morse words representing "S" "O" "S"
 /// const SOS: [MorseWord; 3] = morse!(... ___ ...);
 /// ```

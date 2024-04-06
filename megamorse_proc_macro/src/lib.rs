@@ -18,7 +18,11 @@ pub fn morse(item: TokenStream) -> TokenStream {
 
     for word in words {
         if word.len() > 5 {
-            err!(format!("Word is too long: '{}'.\nMaximum length is 5, actual length is {}", word, word.len()));
+            err!(format!(
+                "Word is too long: '{}'.\nMaximum length is 5, actual length is {}",
+                word,
+                word.len()
+            ));
         }
 
         let mut codes: Vec<&str> = Vec::with_capacity(as_string.len());
