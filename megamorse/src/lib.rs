@@ -22,9 +22,67 @@ pub use megamorse_core::*;
 /// ```
 pub use megamorse_proc_macro::morse;
 
+/// Trait representing a Morse code decoder.
+/// Can be used to construct a [MorsePlayer], which
+/// then uses the decoder to play Morse code sequences.
+///
+/// The decoder is responsible for interpreting the
+/// Morse code sequences and translating them into
+/// actions, such as turning on and off a light or
+/// a buzzer, or sending signals to any other type
+/// of application or program.
 pub trait MorseDecoder {
+    /// The error type that the decoder can return.
     type Error;
+
+    /// Set the decoder output to "on" for a given number of time units.
+    /// After the time units have passed, the output should be turned off.
+    ///
+    /// # Arguments
+    ///
+    /// * `timeunits` - The number of time units to keep the output on for.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// fn on(&mut self, timeunits: usize) -> Result<(), Self::Error> {
+    ///     let led = get_led();
+    ///     // Turn the output on for the specified number of time units.
+    ///     led.on();
+    ///     // Now wait for the specified number of time units.
+    ///     let timeunit_ms = 200;
+    ///     sleep(timeunits * timeunit_ms);
+    ///     // Turn the output off, and return control to the player.
+    ///     led.off();
+    ///     Ok(())
+    /// }
     fn on(&mut self, timeunits: usize) -> Result<(), Self::Error>;
+
+    /// Pause the decoder output for a given number of time units.
+    ///
+    /// The function should ensure that it does not return until the
+    /// specified number of time units have passed.
+    ///
+    /// This is mainly used to keep the [MorsePlayer] flexible, as
+    /// sleep functionality can be implemented in different ways
+    /// depending on the target platform.
+    ///
+    /// # Arguments
+    ///
+    /// * `timeunits` - The number of time units to pause for.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// fn off(&mut self, timeunits: usize) -> Result<(), Self::Error> {
+    ///     // Sleep for the specified number of time units, and
+    ///     // return control to the player once the sleep has completed.
+    ///     let timeunit_ms = 200;
+    ///     sleep(timeunits * timeunit_ms);
+    ///     Ok(())
+    /// }
+    /// ````
+    ///
     fn off(&mut self, timeunits: usize) -> Result<(), Self::Error>;
 }
 
