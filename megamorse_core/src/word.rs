@@ -150,184 +150,162 @@ impl TryFrom<char> for MorseWord {
         let as_lower = value.to_ascii_lowercase();
 
         let word = match as_lower {
-            'a' => MorseWord::from([MorseCode::Dot, MorseCode::Dash]).into(),
+            'a' => MorseWord::from([MorseCode::Dot, MorseCode::Dash]),
             'b' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             'c' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dot,
-            ])
-            .into(),
-            'd' => MorseWord::from([MorseCode::Dash, MorseCode::Dot, MorseCode::Dot]).into(),
-            'e' => MorseWord::from([MorseCode::Dot]).into(),
+            ]),
+            'd' => MorseWord::from([MorseCode::Dash, MorseCode::Dot, MorseCode::Dot]),
+            'e' => MorseWord::from([MorseCode::Dot]),
             'f' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dot,
-            ])
-            .into(),
-            'g' => MorseWord::from([MorseCode::Dash, MorseCode::Dash, MorseCode::Dot]).into(),
+            ]),
+            'g' => MorseWord::from([MorseCode::Dash, MorseCode::Dash, MorseCode::Dot]),
             'h' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
-            'i' => MorseWord::from([MorseCode::Dot, MorseCode::Dot]).into(),
+            ]),
+            'i' => MorseWord::from([MorseCode::Dot, MorseCode::Dot]),
             'j' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             'k' => MorseWord::from([MorseCode::Dash, MorseCode::Dot, MorseCode::Dash]),
             'l' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
-            'm' => MorseWord::from([MorseCode::Dash, MorseCode::Dash]).into(),
-            'n' => MorseWord::from([MorseCode::Dash, MorseCode::Dot]).into(),
-            'o' => MorseWord::from([MorseCode::Dash, MorseCode::Dash, MorseCode::Dash]).into(),
+            ]),
+            'm' => MorseWord::from([MorseCode::Dash, MorseCode::Dash]),
+            'n' => MorseWord::from([MorseCode::Dash, MorseCode::Dot]),
+            'o' => MorseWord::from([MorseCode::Dash, MorseCode::Dash, MorseCode::Dash]),
             'p' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             'q' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dash,
-            ])
-            .into(),
-            'r' => MorseWord::from([MorseCode::Dot, MorseCode::Dash, MorseCode::Dot]).into(),
-            's' => MorseWord::from([MorseCode::Dot, MorseCode::Dot, MorseCode::Dot]).into(),
-            't' => MorseWord::from([MorseCode::Dash]).into(),
-            'u' => MorseWord::from([MorseCode::Dot, MorseCode::Dot, MorseCode::Dash]).into(),
+            ]),
+            'r' => MorseWord::from([MorseCode::Dot, MorseCode::Dash, MorseCode::Dot]),
+            's' => MorseWord::from([MorseCode::Dot, MorseCode::Dot, MorseCode::Dot]),
+            't' => MorseWord::from([MorseCode::Dash]),
+            'u' => MorseWord::from([MorseCode::Dot, MorseCode::Dot, MorseCode::Dash]),
             'v' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dash,
-            ])
-            .into(),
-            'w' => MorseWord::from([MorseCode::Dot, MorseCode::Dash, MorseCode::Dash]).into(),
+            ]),
+            'w' => MorseWord::from([MorseCode::Dot, MorseCode::Dash, MorseCode::Dash]),
             'x' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             'y' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             'z' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             '0' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             '1' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             '2' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             '3' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dash,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             '4' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dash,
-            ])
-            .into(),
+            ]),
             '5' => MorseWord::from([
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             '6' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             '7' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             '8' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dot,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             '9' => MorseWord::from([
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dash,
                 MorseCode::Dot,
-            ])
-            .into(),
+            ]),
             _ => return Err(()),
         };
 
