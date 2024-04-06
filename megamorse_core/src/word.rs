@@ -3,7 +3,7 @@ use crate::{MorseCode, MorseSequence};
 /// A struct representing a single morse code sequence that maps
 /// to a single character. For example, 'a', '0' or 'G' all map
 /// to a single [MorseWord].
-/// 
+///
 /// The [MorseWord] can contain up to 5 [MorseCode] values, and can
 /// thus represent any character in the Morse code alphabet (and no more)
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -59,27 +59,27 @@ impl MorseWord {
     }
 
     /// Returns the [MorseWord] as an array of [MorseCode] values.
-    /// 
+    ///
     /// The array will contain up to 5 [MorseCode] values, depending
     /// on the length of the [MorseWord].
-    /// 
+    ///
     /// # Returns
-    /// 
+    ///
     /// A tuple containing the length of the MorseWord and an array
     /// of [MorseCode] values.
-    /// 
+    ///
     /// The returned array will be padded with [MorseCode::Dot] values if the
     /// [MorseWord] is shorter than 5 characters.
-    /// 
+    ///
     /// # Examples
-    /// 
+    ///
     /// ```
     /// let word = morse!(..-);
-    /// 
+    ///
     /// let (len, codes) = word.to_array();
-    /// 
+    ///
     /// assert_eq!(len, 3);
-    /// 
+    ///
     /// assert_eq!(codes[0], MorseCode::Dot);
     /// assert_eq!(codes[1], MorseCode::Dot);
     /// assert_eq!(codes[2], MorseCode::Dash);
@@ -148,13 +148,13 @@ impl MorseWord {
     /// Used internally by the megamorse library to convert a [MorseWord] to a
     /// sequence of playable [MorseSequence] values, with each
     /// [MorseSequence] representing a single Morse code time unit.
-    /// 
+    ///
     /// # Returns
-    /// 
+    ///
     /// A tuple containing the length of the [MorseSequence] array and the
     /// array itself, padded with [MorseSequence::Pause] values if the
     /// [MorseWord] is shorter than 5 characters.
-    /// 
+    ///
     /// Reading beyond the length given by the first element of the tuple is
     /// not useful, as the array will be padded with [MorseSequence::Pause] values.
     pub const fn to_sequence(self) -> (usize, [MorseSequence; 9]) {
@@ -196,7 +196,7 @@ impl MorseWord {
 /// Is used both internally by the megamorse library and can be used
 /// by the user to convert a single character to a [MorseWord], which
 /// can then be played by a player.
-/// 
+///
 /// Will return an error if the character has no Morse code representation.
 impl TryFrom<char> for MorseWord {
     type Error = ();

@@ -1,3 +1,15 @@
+//! This crate contains the procedural macro that is used to convert a string of morse code into a
+//! sequence of MorseWords.
+//!
+//! # Examples
+//!
+//! ```
+//! let words = morse!(... ___ ...);
+//!
+//! for word in words.into_iter() {
+//!    player.play_word(word).unwrap();
+//! }
+//! ```
 extern crate proc_macro;
 use proc_macro::TokenStream;
 
