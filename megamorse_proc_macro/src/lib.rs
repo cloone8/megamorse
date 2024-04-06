@@ -10,9 +10,9 @@ pub fn morse(item: TokenStream) -> TokenStream {
     for c in as_string.chars() {
         match c {
             ' ' => {}
-            '.' => codes.push("megamorse_core::MorseCode::Dot"),
-            '-' => codes.push("megamorse_core::MorseCode::Dash"),
-            '_' => codes.push("megamorse_core::MorseCode::Dash"),
+            '.' => codes.push("MorseCode::Dot"),
+            '-' => codes.push("MorseCode::Dash"),
+            '_' => codes.push("MorseCode::Dash"),
             _ => panic!("Invalid character in morse code: {}", c),
         }
     }
